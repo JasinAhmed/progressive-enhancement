@@ -5,91 +5,106 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Veelgestelde vragen / Progressive Enhancement / FDND</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
   <link href="assets/styles.css" rel="stylesheet">
-  <style>
-    /* Schrijf hier gewoon je CSS voor dit component */
 
-    /* Hint: Dit component kun je volledig met HTML en CSS bouwen */
+<style>
+  /* FAQ CONTAINER */
 
-    /* Hint: Denk aan de states van het component; deze kan open en dicht zijn */
-
-
-    details {
-      width: fit-content;
-    }
-
-    summary {
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-      list-style: none;
-      padding: .75rem 1rem;
-      border: 1px solid black;
-      border-radius: .5rem;
-      cursor: pointer;
-      width: fit-content;
-    }
+  /* Elk details-element is zo breed als de inhoud */
+  details {
+    width: fit-content;
+  }
 
 
-    summary::before {
-      content: "+";
-      font-size: 1.5rem;
-      line-height: 1;
-    }
+  /* QUESTION / SUMMARY  */
 
-    details[open] summary::before {
-      content: "×";
-    }
+  /* De vraagregel die je aanklikt */
+  summary {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
 
-    details[open] summary {
-      border-radius: .5rem .5rem 0 0;
-      border-bottom: none;
-    }
+    list-style: none;
+    padding: .75rem 1rem;
 
-    details p {
-      display: none;
-      margin: 0;
-      padding: 1rem;
-      border-radius: 0 .5rem .5rem .5rem;
-      max-width: 70ch;
-    }
+    border: 1px solid black;
+    border-radius: .5rem;
 
-    details[open] p {
-      display: block;
-    }
+    cursor: pointer;
+    width: fit-content;
+  }
 
-    details:nth-of-type(1)[open] summary,
-    details:nth-of-type(1)[open] p {
-      background-color: var(--purple);
-    }
+  /* Plus-icoon vóór de tekst van de vraag */
+  summary::before {
+    content: "+";
+    font-size: 1.5rem;
+    line-height: 1;
 
-    details:nth-of-type(2)[open] summary,
-    details:nth-of-type(2)[open] p {
-      background-color: var(--green);
-    }
+    display: inline-block; /* nodig om te kunnen draaien */
+    transition: transform 0.3s ease; /* zorgt voor smooth animatie */
+  }
 
-    details:nth-of-type(3)[open] summary,
-    details:nth-of-type(3)[open] p {
-      background-color: var(--yellow);
-    }
 
-    summary:focus-visible {
-      outline: 2px solid black;
-      outline-offset: 2px;
-    }
-  </style>
+  /* OPEN STATE */
+
+  /* Als details open staat, draait het plusje naar een kruisje */
+  details[open] summary::before {
+    transform: rotate(45deg);
+  }
+
+  /* Als details open staat, krijgt de bovenkant een open vorm */
+  details[open] summary {
+    border-radius: .5rem .5rem 0 0;
+    border-bottom: none;
+  }
+
+
+  /* ANTWOORD CONTENT */
+
+  /* Antwoord standaard verbergen */
+  details p {
+    display: none;
+    margin: 0;
+    padding: 1rem;
+
+    border-radius: 0 .5rem .5rem .5rem;
+  }
+
+  details[open] p {
+    display: block;
+  }
+
+  details:nth-of-type(1)[open] summary,
+  details:nth-of-type(1)[open] p {
+    background-color: var(--purple);
+  }
+
+  details:nth-of-type(2)[open] summary,
+  details:nth-of-type(2)[open] p {
+    background-color: var(--green);
+  }
+
+  details:nth-of-type(3)[open] summary,
+  details:nth-of-type(3)[open] p {
+    background-color: var(--yellow);
+  }
+</style>
+
 </head>
 
 <body>
   <h1>Veelgestelde vragen</h1>
 
-  <!-- Content (waar nog wat HTML omheen moet 😄): -->
   <details>
     <summary>
       Wat is frontend development?
     </summary>
-    <p>Een frontend developer ontwerpt en bouwt websites in HTML, CSS en JavaScript. Deze frontend talen leer je bij ons, je hebt dus geen voorkennis nodig.</p>
+    <p>
+      Een frontend developer ontwerpt en bouwt websites in HTML, CSS en JavaScript.
+      Deze frontend talen leer je bij ons, je hebt dus geen voorkennis nodig.
+    </p>
   </details>
 
   <details>
@@ -97,8 +112,9 @@
       Moet ik al kunnen coderen?
     </summary>
     <p>
-      Nee, je hebt helemaal geen voorkennis nodig om te beginnen aan deze opleiding, we kunnen je alles leren! Als je wel al voorkennis hebt, is dat alleen
-      maar goed, dan kunnen we je helpen je skills te verbeteren en te verdiepen in de stof.
+      Nee, je hebt helemaal geen voorkennis nodig om te beginnen aan deze opleiding,
+      we kunnen je alles leren! Als je wel al voorkennis hebt, is dat alleen maar goed,
+      dan kunnen we je helpen je skills te verbeteren en te verdiepen in de stof.
     </p>
   </details>
 
@@ -107,16 +123,19 @@
       Wat is een Associate Degree?
     </summary>
     <p>
-      Een Associate degree-opleiding is een tweejarige hbo-opleiding op niveau 5. Een Ad slaat een brug tussen het mbo-4 (niveau 4) en een hbo-bachelor
-      (niveau 6). Met een Associate degree kies je voor een praktijkgerichte hbo-opleiding; je wordt opgeleid voor een beroep dat aansluit bij de praktijk. In
-      dit geval word je opgeleid tot 'frontend designer/developer' of kortweg 'frontender'. Frontenders ontwerpen en maken interactieve, toegankelijke
-      toepassingen voor het web. Frontenders werken binnen het gebied van software development, interactieontwerp en digitaal visueel ontwerp. Na afronding
-      van deze tweejarige hbo-opleiding, krijg je een wettelijk erkend hbo-diploma met de graad Associate degree. Met dit Ad-diploma kun je direct aan de slag
-      in het werkveld of doorstromen naar de bacheloropleiding Communication and Multimedia Design (CMD).
+      Een Associate degree-opleiding is een tweejarige hbo-opleiding op niveau 5.
+      Een Ad slaat een brug tussen het mbo-4 (niveau 4) en een hbo-bachelor (niveau 6).
+      Met een Associate degree kies je voor een praktijkgerichte hbo-opleiding;
+      je wordt opgeleid voor een beroep dat aansluit bij de praktijk. In dit geval word je
+      opgeleid tot 'frontend designer/developer' of kortweg 'frontender'. Frontenders ontwerpen
+      en maken interactieve, toegankelijke toepassingen voor het web. Frontenders werken binnen
+      het gebied van software development, interactieontwerp en digitaal visueel ontwerp.
+      Na afronding van deze tweejarige hbo-opleiding, krijg je een wettelijk erkend hbo-diploma
+      met de graad Associate degree. Met dit Ad-diploma kun je direct aan de slag in het werkveld
+      of doorstromen naar de bacheloropleiding Communication and Multimedia Design (CMD).
     </p>
   </details>
 
-  <!-- Hint: Dit stukje HTML geeft het misschien al weg :) -->
   <details>
     <summary>Demo video</summary>
     <video src="assets/faq.mp4" width="765" height="769" controls muted autoplay loop>
