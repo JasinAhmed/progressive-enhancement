@@ -10,85 +10,120 @@
   <link href="assets/styles.css" rel="stylesheet">
 
 <style>
-  /* FAQ CONTAINER */
-
-  /* Elk details-element is zo breed als de inhoud */
+  /* FAQ BLOKKEN */
   details {
-    width: fit-content;
+    max-width: 50rem;
+    margin-bottom: 1rem;
   }
 
 
-  /* QUESTION / SUMMARY  */
-
-  /* De vraagregel die je aanklikt */
+  /* VRAAG / SUMMARY */
   summary {
     display: flex;
     align-items: center;
     gap: .5rem;
-
     list-style: none;
     padding: .75rem 1rem;
-
     border: 1px solid black;
     border-radius: .5rem;
-
     cursor: pointer;
     width: fit-content;
   }
 
-  /* Plus-icoon vóór de tekst van de vraag */
+  /* Laat goed zien wanneer je met tab op summary zit */
+  summary:focus-visible {
+    outline: 2px solid black;
+    outline-offset: 4px;
+  }
+
+  /* Plusje voor de vraag */
   summary::before {
     content: "+";
     font-size: 1.5rem;
     line-height: 1;
-
-    display: inline-block; /* nodig om te kunnen draaien */
-    transition: transform 0.3s ease; /* zorgt voor smooth animatie */
+    display: inline-block;
+    transition: transform 0.3s ease;
   }
 
 
-  /* OPEN STATE */
+  /* OPEN STATUS */
 
-  /* Als details open staat, draait het plusje naar een kruisje */
+  /* Draait het plusje als details open staat */
   details[open] summary::before {
     transform: rotate(45deg);
   }
 
-  /* Als details open staat, krijgt de bovenkant een open vorm */
+  /* Past de vorm van de bovenkant aan als details open staat */
   details[open] summary {
     border-radius: .5rem .5rem 0 0;
     border-bottom: none;
   }
 
 
-  /* ANTWOORD CONTENT */
+  /* INHOUD VAN HET ANTWOORD */
 
-  /* Antwoord standaard verbergen */
-  details p {
-    display: none;
+  /* Pak alles in details behalve summary. Dus bijvoorbeeld een p of een video.*/
+  details > :not(summary) {
     margin: 0;
     padding: 1rem;
-
-    border-radius: 0 .5rem .5rem .5rem;
+    border: 1px solid black;
+    border-top: none;
+    border-radius: 0 0 .5rem .5rem;
   }
 
-  details[open] p {
+  /* Zorgt dat de video netjes binnen het vak past */
+  video {
+    max-width: 100%;
+    height: auto;
     display: block;
   }
 
+
+
   details:nth-of-type(1)[open] summary,
-  details:nth-of-type(1)[open] p {
+  details:nth-of-type(1)[open] > :not(summary) {
     background-color: var(--purple);
   }
 
   details:nth-of-type(2)[open] summary,
-  details:nth-of-type(2)[open] p {
+  details:nth-of-type(2)[open] > :not(summary) {
     background-color: var(--green);
   }
 
   details:nth-of-type(3)[open] summary,
-  details:nth-of-type(3)[open] p {
+  details:nth-of-type(3)[open] > :not(summary) {
     background-color: var(--yellow);
+  }
+
+
+  /* Alleen animeren als de browser deze nieuwe CSS ondersteunt */
+  @supports (interpolate-size: allow-keywords) and (selector(::details-content)) {
+    /* Alleen animeren als gebruiker geen reduced motion heeft ingesteld */
+    @media (prefers-reduced-motion: no-preference) {
+
+      /*Hiermee mag CSS animeren van 0 naar auto Dat kan normaal niet */
+      details {
+        interpolate-size: allow-keywords;
+      }
+
+      /*Dit is de inhoud van details Dus alles onder summary*/
+      details::details-content {
+        block-size: 0;   /* begint dicht */
+        opacity: 0;      /* begint onzichtbaar */
+
+        transition:
+          content-visibility 0.35s allow-discrete,
+          block-size 0.35s ease,
+          opacity 0.35s ease;
+      }
+
+      /* 
+        Als details open gaat: wordt de hoogte automatisch goed gezet  wordt de inhoud zichtbaar */
+      details[open]::details-content {
+        block-size: auto;
+        opacity: 1;
+      }
+    }
   }
 </style>
 
