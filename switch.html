@@ -43,7 +43,7 @@
 				background-color: white;
 				border-radius: inherit;
 
-				transition: all 0.25s ease; /* animatie */
+				transition: translate 0.25s ease; /* animatie */
 				margin-inline: 0.25rem;
 			}
 
@@ -65,6 +65,13 @@
 				background-color: white;
 
 				translate: 100%; /* schuift naar rechts */
+			}
+
+			/* respecteert gebruikersinstelling voor minder animatie */
+			@media (prefers-reduced-motion: reduce) {
+				input::after {
+					transition: none; /* animatie uit */
+				}
 			}
 		</style>
 	</head>
