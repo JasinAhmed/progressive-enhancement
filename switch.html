@@ -64,10 +64,10 @@
 				content: "aan"; /* tekst in bolletje */
 				background-color: white;
 
-				translate: 100%; /* schuift naar rechts */
+				translate: 115%; /* schuift naar rechts */
 			}
 
-			/* respecteert gebruikersinstelling voor minder animatie */
+			/* gebruikersinstelling voor minder animatie */
 			@media (prefers-reduced-motion: reduce) {
 				input::after {
 					transition: none; /* animatie uit */
@@ -80,7 +80,6 @@
 		<h1>Switch control</h1>
 
 		<form>
-			<!-- checkbox is de basis (werkt altijd) -->
 			<input type="checkbox" name="switch">
 		</form>
 
